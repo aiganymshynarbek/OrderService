@@ -1,0 +1,25 @@
+﻿# Ignore build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Visual Studio project files
+*.vs/
+
+# Database files
+*.db
+
+# Other
+*.log
+*.DS_Store
