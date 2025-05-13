@@ -1,5 +1,6 @@
 ﻿using OrderService.Data;
 using Microsoft.EntityFrameworkCore;
+using OrderService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 // Register PostgreSQL DbContext
 builder.Services.AddDbContext<OrderDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<OrderService.Services.IOrderService, OrderService.Services.OrderService>();
 
 
 var app = builder.Build();
