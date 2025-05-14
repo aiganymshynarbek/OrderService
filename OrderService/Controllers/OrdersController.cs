@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OrderService.Dtos;
 using OrderService.Models;
 using OrderService.Services;
 
@@ -16,13 +17,14 @@ namespace OrderService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrders()
         {
             return Ok(await _orderService.GetAllAsync());
         }
 
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<ActionResult<OrderDto>> GetOrder(int id)
         {
             var order = await _orderService.GetByIdAsync(id);
             if (order == null) return NotFound();
@@ -30,7 +32,7 @@ namespace OrderService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<OrderDto>> PostOrder(Order order)
         {
             var created = await _orderService.CreateAsync(order);
             return CreatedAtAction(nameof(GetOrder), new { id = created.Id }, created);

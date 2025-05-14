@@ -1,6 +1,8 @@
 ﻿using OrderService.Data;
 using Microsoft.EntityFrameworkCore;
 using OrderService.Services;
+using OrderService.Mappings;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<OrderDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//AutoMapper
+builder.Services.AddAutoMapper(typeof(OrderProfile));
+
 builder.Services.AddScoped<OrderService.Services.IOrderService, OrderService.Services.OrderService>();
+
 
 
 var app = builder.Build();
